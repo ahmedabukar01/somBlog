@@ -1,0 +1,17 @@
+{
+  "name": "somblog",
+  "version": "1.0.0",
+  "description": "blog",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon server/app.js"
+  },
+  "author": "Ahmed Abukar",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.4",
+    "nodemon": "^2.0.15"
+  }
+}
