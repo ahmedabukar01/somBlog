@@ -11,7 +11,10 @@ const postRoutes = require('./Routes/postRoutes');
 connectDB();
 
 // middlewares
-app.use('/posts',postRoutes)
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
+app.use('/posts',postRoutes);
 
 app.listen(PORT,()=>{
     console.log(`Server is running at : ${PORT}`)

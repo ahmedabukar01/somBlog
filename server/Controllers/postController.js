@@ -1,19 +1,26 @@
+const Post = require('../Models/postModel');
+const asyncHandler = require('express-async-handler');
+
+//get posts
+const getPost = asyncHandler(async (req, res)=>{
+    const posts = await Post.find();
+    res.json({posts})
+})
+
 //
-const getPost = (req, res)=>{
-    res.json({message: 'get all posts'})
-}
+const createPost = asyncHandler(async (req, res)=>{
+    const post = await Post.create(req.body);
+
+    res.json({post})
+})
 //
-const createPost = (req, res)=>{
-    res.json({message: 'Create posts'})
-}
-//
-const updatePost = (req, res)=>{
+const updatePost = asyncHandler(async (req, res)=>{
     res.json({message: 'update posts'})
-}
+})
 //
-const deletePost = (req, res)=>{
+const deletePost = asyncHandler(async (req, res)=>{
     res.json({message: 'delete Post'})
-}
+})
 
 
 // exports
