@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv').config();
 const colors = require('colors');
 const connectDB = require('./database/db');
+const errorHandler = require('./Middlewares/errors');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}))
 
 app.use('/posts',postRoutes);
+app.use(errorHandler);
 
 app.listen(PORT,()=>{
     console.log(`Server is running at : ${PORT}`)

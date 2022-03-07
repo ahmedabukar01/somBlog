@@ -9,9 +9,15 @@ const getPost = asyncHandler(async (req, res)=>{
 
 //
 const createPost = asyncHandler(async (req, res)=>{
-    const post = await Post.create(req.body);
+    const {title, body} = req.body;
+    if(!title || !body){
+        res.status(400);
+        throw new Error('fill the blank man!')
+    }
 
-    res.json({post})
+    const post = await Post.create({title,body});
+
+    res.status(200).json({post})
 })
 //
 const updatePost = asyncHandler(async (req, res)=>{
