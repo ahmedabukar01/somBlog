@@ -1,6 +1,9 @@
+// note: error in jwt .....
+
 const jwt = require('jsonwebtoken');
 const User = require('../Models/userModel');
 const asyncHandler = require('express-async-handler');
+const bcrypt = require('bcryptjs');
 
 // registration
 const userRegister =asyncHandler(async (req,res) =>{
@@ -18,8 +21,25 @@ const userRegister =asyncHandler(async (req,res) =>{
         res.status(400);
         throw new Error('user already existed');
     }
+    // save user
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password,salt);
 
-    res.status(200).json({message: genJwt('salfjskfj3332232ddkal')})
+    const user = await User.create({
+        name,
+        email,
+        password: hashedPassword
+    })
+
+    if(user){
+      res.status(200);
+      res.json({
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          
+      })
+    }
 })
 
 // login User
