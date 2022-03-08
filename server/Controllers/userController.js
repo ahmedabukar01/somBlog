@@ -37,7 +37,7 @@ const userRegister =asyncHandler(async (req,res) =>{
           id: user.id,
           name: user.name,
           email: user.email,
-          
+          token: genJwt(user._id)
       })
     }
 })
@@ -49,12 +49,22 @@ const loginUser =asyncHandler(async (req,res) =>{
 
 // user profile
 const userProfile =asyncHandler(async (req,res) =>{
-    res.status(200).json({message: 'here for user profile info :) '})
+    const user = await User.findById(req.user.id);
+    if(!user){
+        req.status(400);
+        throw new Error('user not found');
+    }
+
+    res.status(200).json({
+        id: user.id,
+        name: user.name,
+        email: user.email,
+    })
 })
 
 // Generate jwt
 const genJwt = (id) => {
-    return jwt.sign(id,process.env.JWT_SEC);
+    return jwt.sign({id},process.env.JWT_SEC);
 }
 
 module.exports = {
