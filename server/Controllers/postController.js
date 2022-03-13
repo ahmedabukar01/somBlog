@@ -1,13 +1,30 @@
 const Post = require('../Models/postModel');
 const asyncHandler = require('express-async-handler');
+const { json } = require('express/lib/response');
 
-//get posts
+// Get posts
+// @Method GET
+// @Path /posts
 const getPost = asyncHandler(async (req, res)=>{
     const posts = await Post.find();
     res.json({posts})
 })
 
-//
+// GEt Single Post
+// @method GET
+// @Path /posts/id
+const singlePost = asyncHandler(async (req,res)=>{
+    const post = await Post.findById(req.params.id);
+    if(!post){
+        res.json(400);
+        throw new Error('post not found');
+    }
+
+    res.json({post});
+})
+
+// @method POST
+// @path /posts
 const createPost = asyncHandler(async (req, res)=>{
     const {title, body} = req.body;
     if(!title || !body){
