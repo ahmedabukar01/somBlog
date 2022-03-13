@@ -44,7 +44,22 @@ const userRegister =asyncHandler(async (req,res) =>{
 
 // login User
 const loginUser =asyncHandler(async (req,res) =>{
-    res.status(200).json({message: 'here for login page /\:) '})
+    const {email, password } = req.body;
+
+    const user = await User.findOne({email});
+    if(user && bcrypt.compare(password, user.password)){
+        
+        res.status(200);
+        res.json({
+            id: user.id,
+            name: user.name,
+            email: user.email,
+            token: genJwt(user.id)
+        })
+    } else{
+        res.status(400);
+        throw new Error('incorrect email or password')
+    }
 })
 
 // user profile
