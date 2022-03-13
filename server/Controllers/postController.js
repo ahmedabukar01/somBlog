@@ -21,7 +21,13 @@ const createPost = asyncHandler(async (req, res)=>{
 })
 //
 const updatePost = asyncHandler(async (req, res)=>{
-    res.json({message: 'update posts'})
+    const post = await Post.findById(req.params.id);
+
+    if(!post){
+        res.status(400);
+        throw new Error('post not found!')
+    }
+    res.json({post: post});
 })
 //
 const deletePost = asyncHandler(async (req, res)=>{
