@@ -43,6 +43,21 @@ const updatePost = asyncHandler(async (req, res)=>{
 })
 //
 const deletePost = asyncHandler(async (req, res)=>{
+    const post = await Post.findById(req.params.id);
+
+    if(!post){
+        res.status(400);
+        throw new Error('post not found!')
+    }
+
+    // check 
+    if(post.user.toString() !== req.user.id){
+        res.status(400);
+        throw new Error('unathorized user')
+    } 
+
+    await Post.findByIdAndRemove(req.params.id);
+
     res.json({message: 'delete Post'})
 })
 
