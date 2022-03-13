@@ -15,7 +15,11 @@ const createPost = asyncHandler(async (req, res)=>{
         throw new Error('fill the blank man!')
     }
 
-    const post = await Post.create({title,body});
+    const post = await Post.create({
+        title: req.body.title,
+        body: req.body.body,
+        user: req.user.id
+    });
 
     res.status(200).json({post})
 })
@@ -27,7 +31,15 @@ const updatePost = asyncHandler(async (req, res)=>{
         res.status(400);
         throw new Error('post not found!')
     }
-    res.json({post: post});
+
+    // check 
+    if(post.user.toString() !== req.user.id){
+        res.status(400);
+        throw new Error('unathorized user')
+    } 
+
+    const updated = await Post.findByIdAndUpdate(req.params.id, req.body, {new: true})
+    res.json({post: updated});
 })
 //
 const deletePost = asyncHandler(async (req, res)=>{
