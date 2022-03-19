@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const adminSchema = mongoose.Schema({
+const moderatorSchema = mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -13,4 +13,10 @@ const adminSchema = mongoose.Schema({
         type: Integer,
         required: [true, 'phone number required'] 
     }
-})
+},
+{
+    timestamps: true
+}
+)
+
+module.exports = mongoose.model('Moderators',moderatorSchema);
