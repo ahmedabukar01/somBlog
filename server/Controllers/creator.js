@@ -4,7 +4,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs')
 
 const getModerators = asyncHandler(async (req,res)=>{
-    
+    const mod = await Moderator.find();
+    res.json(mod);
     // here goes on
 })
 
