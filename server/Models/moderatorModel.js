@@ -7,7 +7,13 @@ const moderatorSchema = mongoose.Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique: [true, 'email must be unique']
+    },
+    secretKey: {
+        type: String,
+        required: true,
+        unique: [true, 'secret key must be unique']
     },
     phone:{
         type: Integer,
