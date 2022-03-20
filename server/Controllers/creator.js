@@ -12,7 +12,7 @@ const getModerators = asyncHandler(async (req,res)=>{
 const addModerator = asyncHandler(async (req,res)=>{
     // here goes on
     const {name, email, phone, secretKey} = req.body;
-    if(!name || !email || !phone || secretKey){
+    if(!name || !email || !phone || !secretKey){
         res.status(400);
         throw new Error('fill all required fields !')
     }
@@ -47,6 +47,22 @@ const addModerator = asyncHandler(async (req,res)=>{
 })
 
 const singleModerator = asyncHandler(async (req,res)=>{
+    const phone = req.body;
+    console.log(!phone)
+    if(!phone) {
+        res.status(400);
+        throw new Error('enter phone number')
+    }
+
+    const isMod = await Moderator.findOne(phone);
+
+    console.log(phone, isMod)
+    if(!isMod){
+        res.status(400);
+        throw new Error('phone number not founded')
+    }
+
+    res.json(isMod);
     // here goes on
 })
 const deleteModerator = asyncHandler(async (req,res)=>{
@@ -68,5 +84,6 @@ module.exports = {
     getModerators,
     addModerator,
     deleteModerator,
+    singleModerator,
     otherStuff
 }

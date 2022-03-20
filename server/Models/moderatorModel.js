@@ -16,8 +16,9 @@ const moderatorSchema = mongoose.Schema({
         unique: [true, 'secret key must be unique']
     },
     phone:{
-        type: Integer,
-        required: [true, 'phone number required'] 
+        type: Number,
+        required: [true, 'phone number required'],
+        unique: [true, 'phone number must be unique']
     }
 },
 {
