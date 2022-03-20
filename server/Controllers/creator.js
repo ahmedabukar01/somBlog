@@ -1,3 +1,5 @@
+// error when finding singleModerator, passing the number then nothing works the way we wanted.
+
 const asyncHandler = require('express-async-handler');
 const Moderator = require('../Models/moderatorModel');
 const jwt = require('jsonwebtoken');
@@ -48,7 +50,6 @@ const addModerator = asyncHandler(async (req,res)=>{
 
 const singleModerator = asyncHandler(async (req,res)=>{
     const phone = req.body;
-    console.log(!phone)
     if(!phone) {
         res.status(400);
         throw new Error('enter phone number')
