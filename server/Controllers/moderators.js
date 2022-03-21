@@ -15,13 +15,16 @@ const siginMod = asyncHandler(async (req,res)=>{
     }
 
     const mod = await Moderator.findOne({email});
-    if(mod && bcrypt.compare(mod.password)){
+    if(mod && (await bcrypt.compare(password, mod.password))){
         res.json({
             id: mod.id,
             name: mod.name,
             email,
             token: jwtGen(mod.id)
         })
+    } else{
+        res.status(400);
+        throw new Error('email or password is incorrect!')
     }
 
 });

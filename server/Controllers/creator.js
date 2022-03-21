@@ -11,10 +11,11 @@ const getModerators = asyncHandler(async (req,res)=>{
     // here goes on
 })
 
+// add modertor
 const addModerator = asyncHandler(async (req,res)=>{
     // here goes on
     const {name, email, password, phone} = req.body;
-    if(!name || !email || !password){
+    if(!name || !email || !password || !phone){
         res.status(400);
         throw new Error('fill all required fields !')
     }
@@ -28,7 +29,7 @@ const addModerator = asyncHandler(async (req,res)=>{
 
     // bcyrpting the secret key
     const salt = await bcrypt.genSalt(10);
-    const hashedPass = await bcrypt.hash(secretKey, salt);
+    const hashedPass = await bcrypt.hash(password, salt);
 
     const mod = await Moderator.create(
         {
