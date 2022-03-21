@@ -19,6 +19,7 @@ app.use(express.urlencoded({extended: true}))
 app.use('/posts',postRoutes);
 app.use('/users', require('./Routes/userRoutes'));
 app.use('/admin',adminRoute)
+app.use('/moderator', require('./Routes/moderatorRoutes'));
 app.use(errorHandler);
 
 app.listen(PORT,()=>{

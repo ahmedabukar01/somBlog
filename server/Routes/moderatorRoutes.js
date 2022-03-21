@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const {getAllUsers} = require('../Controllers/moderators');
+const {getAllUsers, siginMod} = require('../Controllers/moderators');
 
-router.get('/',getAllUsers);
+router.get('/login',siginMod);
 
 module.exports = router;
