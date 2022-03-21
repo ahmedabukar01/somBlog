@@ -3,7 +3,6 @@ const Post = require('../Models/postModel');
 const Trash = require('../Models/trashModel');
 const Moderator = require('../Models/moderatorModel');
 const bcrypt = require('bcryptjs');
-const jsonwebtoken = require('jsonwebtoken');
 const jwt = require('jsonwebtoken');
 
 // Sigin MODERATORS

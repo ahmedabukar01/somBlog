@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const trashSchema = mongoose.Schema({
     deletedBy: {
-        moderator: mongoose.Schema.Types.ObjectId,
-        required: [true, 'deleted by required']
+        type: mongoose.Schema.Types.ObjectId,
+        required: [true, "deleted by required!"]
     },
     title: {
         type: String,
