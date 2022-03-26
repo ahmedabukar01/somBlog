@@ -28,17 +28,17 @@ const siginMod = asyncHandler(async (req,res)=>{
     }
 
 });
-// Sigin MODERATORS
+
 const getAllUsers = asyncHandler(async (req,res)=>{
     // here we go.
 });
-// delete user's post
+// delete user
 const deleteUser = asyncHandler(async (req,res)=>{
     // here we go.
 
 });
 
-// GET user's comment
+// Delete user's Post
 const deletePost = asyncHandler(async (req,res)=>{
     const id = req.params.id;
     const post = await Post.findById(id);
