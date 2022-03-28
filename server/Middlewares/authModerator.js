@@ -7,9 +7,9 @@ const authModerator = asyncHandler(async (req,res,next)=>{
     if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
         try {
             token = req.headers.authorization.split(' ')[1];
-            const decoded = jwt.verify(token,process.env.somblog);
+            const decoded = jwt.verify(token,process.env.JWT_SEC);
             req.mod = await Moderator.findById(decoded.id).select('-password')
-            console.log(req.mod);
+            
             next();
 
         } catch (error) {

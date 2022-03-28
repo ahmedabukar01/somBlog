@@ -60,7 +60,7 @@ const deletePost = asyncHandler(async (req,res)=>{
 
 // generate tokens
 const jwtGen = (id)=>{
-    return jwt.sign({id}, process.env.somblog);
+    return jwt.sign({id}, process.env.JWT_SEC);
 }
 module.exports = {
     getAllUsers,
