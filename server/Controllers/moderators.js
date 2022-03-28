@@ -50,9 +50,15 @@ const deletePost = asyncHandler(async (req,res)=>{
         throw new Error('post not found!');
     }
 
-    await Post.findByIdAndDelete(id);
+    let deletedPost = await Post.findByIdAndDelete(id);
 
-    // const deletedPost = await Trash.create
+     const trash = await Trash.create({
+         title: deletedPost.title,
+         body: deletedPost.body,
+         deletedBy: req.mod,
+         user: deletedPost.user
+     });
+     res.json({trash,});
 
     // here we go.
 });
@@ -65,4 +71,5 @@ const jwtGen = (id)=>{
 module.exports = {
     getAllUsers,
     siginMod,
+    deletePost,
 }
