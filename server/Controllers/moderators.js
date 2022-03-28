@@ -3,6 +3,7 @@ const Post = require('../Models/postModel');
 const Trash = require('../Models/trashModel');
 const Moderator = require('../Models/moderatorModel');
 const bcrypt = require('bcryptjs');
+const User = require('../Models/userModel');
 const jwt = require('jsonwebtoken');
 
 // Sigin MODERATORS
@@ -31,6 +32,8 @@ const siginMod = asyncHandler(async (req,res)=>{
 
 const getAllUsers = asyncHandler(async (req,res)=>{
     // here we go.
+    const users = await User.find();
+    res.json({users: users});
 });
 // delete user
 const deleteUser = asyncHandler(async (req,res)=>{
