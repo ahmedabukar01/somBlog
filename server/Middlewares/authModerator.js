@@ -8,12 +8,13 @@ const authModerator = asyncHandler(async (req,res,next)=>{
         try {
             token = req.headers.authorization.split(' ')[1];
             const decoded = jwt.verify(token,process.env.somblog);
-            req.mod = await Moderator.findById(decoded.id).select('-password');
+            req.mod = await Moderator.findById(decoded.id).select('-password')
+            console.log(req.mod);
             next();
 
         } catch (error) {
             res.status(400);
-            console.log(err);
+            console.log(error);
             res.json({message: 'unathorized user'})
         }
     }else{
@@ -21,3 +22,5 @@ const authModerator = asyncHandler(async (req,res,next)=>{
         res.json({message: 'unathorized and no tokens'})
     }
 })
+
+module.exports = authModerator;

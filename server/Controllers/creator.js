@@ -79,7 +79,7 @@ const otherStuff = asyncHandler(async (req,res)=>{
 
 // generate JWT
 const genJwt = (id) => {
-    return jwt.sign({id}, process.env.JWT_SEC);
+    return jwt.sign({id}, process.env.somblog);
 }
 
 module.exports = {

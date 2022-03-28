@@ -12,7 +12,7 @@ const siginMod = asyncHandler(async (req,res)=>{
     const {email, password} = req.body;
     if(!email || !password) {
         res.status(400);
-        throw new Error('please enter email and both')
+        throw new Error('please enter email and password')
     }
 
     const mod = await Moderator.findOne({email});
@@ -60,7 +60,7 @@ const deletePost = asyncHandler(async (req,res)=>{
 
 // generate tokens
 const jwtGen = (id)=>{
-    return jwt.sign({id}, process.env.JWT_SEC);
+    return jwt.sign({id}, process.env.somblog);
 }
 module.exports = {
     getAllUsers,
