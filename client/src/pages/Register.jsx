@@ -6,10 +6,14 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
 
+    const handleEmail = (e) =>{
+        setEmail(e.target.email.value);
+    }
+
     const submitForm = (e) =>{
         e.preventDefault();
-        const data = {...name, email,password,password2}
-        console.log(data);
+        // const data = {...name, email, password,password2}
+        // console.log(data);
     }
   return (
     <div className='register'>
@@ -28,15 +32,16 @@ const Register = () => {
             <div className="input-group">
                 <input type="email" 
                     placeholder='Email'
-                    name="email" required
-                    value={email}
+                    name="email" 
+                    required
                     onChange={(e)=>setEmail(e.target.email.value)}
                     />
             </div>
             <div className="input-group">
                 <input type="password" 
                     placeholder='Password'
-                    name="password" required
+                    name="password"
+                    required
                     value={password}
                     onChange={(e)=>setPassword(e.target.password.value)}
                     />
@@ -44,7 +49,8 @@ const Register = () => {
             <div className="input-group">
                 <input type="password" 
                     placeholder='Confirm password'
-                    name="password2" required
+                    name="password2" 
+                    required
                     value={password2}
                     onChange={(e)=>setPassword2(e.target.password2.value)}
                     />
