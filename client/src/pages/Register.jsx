@@ -7,14 +7,17 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [password2, setPassword2] = useState('');
 
-    const handleEmail = (e) =>{
-        setEmail(e.target.email.value);
-        console.log(email)
-    }
-
-    const submitForm = (e) =>{
+    const submitForm = async (e) =>{
         e.preventDefault();
+
+        const data = {name, email,password, password2};
         // everything is ready
+        const result = await fetch('/users/register',{
+            method: 'POST',
+            body: JSON.stringify(data)
+        })
+
+        console.log(result, 'that was the result');
     }
   return (
     <div className='register'>
