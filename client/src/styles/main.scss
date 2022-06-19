@@ -12,7 +12,11 @@
     width: 100%;
     padding: 0 10px;
     height: 70px;
-    color:#fff;
+
+    a{
+        text-decoration: none;
+        color:#fff;
+    }
 }
 .links{
     a{
