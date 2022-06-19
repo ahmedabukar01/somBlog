@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import {Form, Button, FormGroup, FormControl} from 'react-bootstrap'
 
 const Register = () => {
     const [name, setName] = useState();
@@ -13,52 +14,56 @@ const Register = () => {
 
     const submitForm = (e) =>{
         e.preventDefault();
-        // const data = {...name, email, password,password2}
-        // console.log(data);
+        // everything is ready
     }
   return (
     <div className='register'>
         <h1>Register</h1>
         <p>Welcome please create new account</p>
-        <form className='form' onSubmit={submitForm}>
-            <div className="input-group">
-                <input type="text" 
+
+        <Form className='form py-3' onSubmit={submitForm}>
+            <Form.Group className="input-group">
+                <Form.Control type="text" 
                     placeholder='Name'
+                    className="mb-3"
                     name="name"
                     required
                     value={name}
                     onChange={(e)=>setName(e.target.value)}
                     />
-            </div>
-            <div className="input-group">
-                <input type="email" 
+            </Form.Group>
+            <Form.Group className="input-group">
+                <Form.Control type="email" 
                     placeholder='Email'
+                    className="mb-3"
                     name="email" 
                     required
                     value={email}
                     onChange={(e)=>setEmail(e.target.value)}
                     />
-            </div>
-            <div className="input-group">
-                <input type="password" 
+            </Form.Group>
+            <Form.Group className="input-group">
+                <Form.Control type="password" 
                     placeholder='Password'
+                    className="mb-3"
                     name="password"
                     required
                     value={password}
                     onChange={(e)=> setPassword(e.target.value)}
                     />
-            </div>
-            <div className="input-group">
-                <input type="password" 
+            </Form.Group>
+            <Form.Group className="input-group">
+                <Form.Control type="password" 
+                    className="mb-3"
                     placeholder='Confirm password'
                     name="password2" 
                     required
                     value={password2}
                     onChange={(e)=>setPassword2(e.target.value)}
                     />
-            </div>
-            <button type='submit'>Submit</button>
-        </form>
+            </Form.Group>
+            <Button variant='primary' type='submit' className="my-3 mx-3">Submit</Button>
+        </Form>
     </div>
   )
 }
