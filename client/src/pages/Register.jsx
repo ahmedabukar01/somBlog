@@ -13,10 +13,7 @@ const Register = () => {
 
         const data = {name, email,password};
         // fetching data from the server
-        const result = await axios.get('http://localhost:5000/users/register',{
-            method: 'POST',
-            body: JSON.stringify(data)
-        })
+        const result = await axios.post('http://localhost:5000/users/register',data)
 
         console.log(result, 'that was the result');
     }
