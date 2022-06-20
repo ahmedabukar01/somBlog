@@ -4,20 +4,26 @@ import {useState, useEffect} from 'react'
 
 
 const Blogs = () => {
-  const [blogs,setBlogs] = useState([]);
+  const [blogs,setBlogs] = useState(null);
 
   useEffect(()=>{
     const fetchData = async () =>{
      const res = await axios.get('http://localhost:5000/posts');
-     console.log('this is me', res.data)
+     setBlogs(res.data.posts);
     }
 
     fetchData();
   },[])
 
+  console.log(blogs)
+
   return (
     <div className='blogs'>
        <h1>All Blogs...</h1>
+
+       {blogs && blogs.map(blog=>(
+        <h3>{blog.body}</h3>
+       ))}
 
     </div>
   )
