@@ -8,9 +8,8 @@ const Blogs = () => {
 
   useEffect(()=>{
     const fetchData = async () =>{
-     const res = await fetch('http://localhost:5000/posts');
-     console.log('hi')
-     console.log(res)
+     const res = await axios.get('http://localhost:5000/posts');
+     console.log('this is me', res.data)
     }
 
     fetchData();
