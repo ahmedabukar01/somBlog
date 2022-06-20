@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react'
+import axios from 'axios'
 import {Form, Button} from 'react-bootstrap'
 
 const Register = () => {
@@ -10,9 +11,9 @@ const Register = () => {
     const submitForm = async (e) =>{
         e.preventDefault();
 
-        const data = {name, email,password, password2};
+        const data = {name, email,password};
         // fetching data from the server
-        const result = await fetch('/users/register',{
+        const result = await axios.get('http://localhost:5000/users/register',{
             method: 'POST',
             body: JSON.stringify(data)
         })
