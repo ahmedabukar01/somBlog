@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import {Form, Button, FormGroup, FormControl} from 'react-bootstrap'
+import {Form, Button} from 'react-bootstrap'
 
 const Register = () => {
     const [name, setName] = useState();
