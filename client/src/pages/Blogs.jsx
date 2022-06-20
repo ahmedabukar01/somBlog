@@ -8,16 +8,9 @@ const Blogs = () => {
 
   useEffect(()=>{
     const fetchData = async () =>{
-      try {
-        console.log('hi')
-        const res = await fetch('http://localhost:3000/posts');
-        const posts = await res.json();
-
-        console.log(posts)
-        
-      } catch (error) {
-        console.log(error)
-      }
+     const res = await fetch('http://localhost:5000/posts');
+     console.log('hi')
+     console.log(res)
     }
 
     fetchData();
