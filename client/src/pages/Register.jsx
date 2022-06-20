@@ -11,7 +11,7 @@ const Register = () => {
         e.preventDefault();
 
         const data = {name, email,password, password2};
-        // everything is ready
+        // fetching data from the server
         const result = await fetch('/users/register',{
             method: 'POST',
             body: JSON.stringify(data)
