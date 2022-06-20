@@ -12,19 +12,25 @@
     width: 100%;
     padding: 0 10px;
     height: 70px;
-
-    a{
+    h1 {
+        a{
         text-decoration: none;
         color:#fff;
+        font-size: 2.2rem;
+        font-weight: bold;
+        }
     }
-}
-.links{
-    a{
-        text-decoration: none;
-        margin-left:0.7rem;
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-        color:#fff;
+    .links{
+        a{
+            text-decoration: none;
+            margin-left:0.7rem;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+            color:#fff;
+            :hover{
+                color:#fff;
+            }
+        }
     }
 }
 .register{
@@ -39,5 +45,11 @@
     .form{
         max-width: 500px;
         margin:auto;
+    }
+}
+
+.blogs{
+    .col{
+        cursor:pointer;
     }
 }

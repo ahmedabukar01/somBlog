@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {useState, useEffect} from 'react'
+import { Container } from 'react-bootstrap';
+import Posts from '../components/Posts';
 
 
 
@@ -19,11 +21,13 @@ const Blogs = () => {
 
   return (
     <div className='blogs'>
-       <h1>All Blogs...</h1>
+       <h1 className='text-center my-3'>All Blogs...</h1>
 
-       {blogs && blogs.map(blog=>(
-        <h3>{blog.body}</h3>
+    <Container>
+      {blogs && blogs.map(blog=>(
+        <Posts key={blog._id} post={blog}/>
        ))}
+    </Container>
 
     </div>
   )
