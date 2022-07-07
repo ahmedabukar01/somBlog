@@ -4,7 +4,8 @@
   "description": "blog",
   "main": "app.js",
   "scripts": {
-    "dev": "nodemon server/server.js"
+    "dev": "nodemon server/server.js",
+    "client": "npm start --prefix client"
   },
   "author": "Ahmed Abukar",
   "license": "ISC",
