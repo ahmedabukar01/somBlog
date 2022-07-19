@@ -10,6 +10,7 @@
   "author": "Ahmed Abukar",
   "license": "ISC",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.3",
     "bcryptjs": "^2.4.3",
     "colors": "^1.4.0",
     "cors": "^2.8.5",
@@ -18,6 +19,7 @@
     "express-async-handler": "^1.2.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "react-redux": "^8.0.2"
   }
 }
