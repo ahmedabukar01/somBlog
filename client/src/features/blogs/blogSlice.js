@@ -1,10 +1,10 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import authServices from './authServices';
 
-const user = localStorage.getItem('user');
+const blogs = localStorage.getItem('blogs');
 
 const initialState = {
-    user: user ? user : null,
+    blogs: blogs ? blogs : null,
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -12,7 +12,7 @@ const initialState = {
 }
 
 // register
-export const register = createAsyncThunk('auth/register', async (user, thunkApi)=>{
+export const getBlogs = createAsyncThunk('auth/blogs', async (user, thunkApi)=>{
     try {
         return authServices.register(user)
     } catch (error) {
@@ -23,8 +23,8 @@ export const register = createAsyncThunk('auth/register', async (user, thunkApi)
     }
 })
 
-export const authSlice = createSlice({
-    name: 'auth',
+export const blogSlice = createSlice({
+    name: 'blogs',
     initialState,
     reducers: {
         reset: (state) =>{
@@ -54,5 +54,5 @@ export const authSlice = createSlice({
 })
 
 
-export const {reset} = authSlice.actions;
-export default authSlice.reducer
+export const {reset} = blogSlice.actions;
+export default blogSlice.reducer
