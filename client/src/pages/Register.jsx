@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import {toast} from 'react-toastify'
 import {useDispatch, useSelector} from 'react-redux'
-import {reset, register} from '../features/authSlice'
+import {reset, register} from '../features/auth/authSlice'
 import {useNavigate} from 'react-router-dom'
 import {Form, Button} from 'react-bootstrap'
 import Spinner from '../components/Spinner'
