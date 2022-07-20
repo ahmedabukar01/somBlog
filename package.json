@@ -20,6 +20,7 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.2.4",
     "nodemon": "^2.0.15",
-    "react-redux": "^8.0.2"
+    "react-redux": "^8.0.2",
+    "react-toastify": "^9.0.7"
   }
 }

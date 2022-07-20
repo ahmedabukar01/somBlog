@@ -1,22 +1,61 @@
 import {useState, useEffect} from 'react'
-import axios from 'axios'
+import {toast} from 'react-toastify'
+import {useDispatch, useSelector} from 'react-redux'
+import {reset, register} from '../features/authSlice'
+import {useNavigate} from 'react-router-dom'
 import {Form, Button} from 'react-bootstrap'
+import Spinner from '../components/Spinner'
 
 const Register = () => {
-    const [name, setName] = useState();
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        password: '',
+        password2: ''
+    });
+
+    const {name, email, password, password2} = formData;
+
+    // onChane
+    const onChange = (e) =>{
+        setFormData(prevData => ({
+            ...prevData, [e.target.name] : e.target.value
+        }))
+    }
+
+    // initiate somethings
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    const {user, isError, isLoading, isSuccess, message} = useSelector((state)=> state.auth);
+
+    useEffect(()=>{
+        if(isError){
+            toast.error(message)
+        }
+        if(isSuccess || user){
+            navigate('/')
+        }
+        dispatch(reset)
+
+    },[user, isError, isLoading, isSuccess, message, dispatch, navigate])
 
     const submitForm = async (e) =>{
         e.preventDefault();
 
-        const data = {name, email,password};
-        // fetching data from the server
-        const result = await axios.post('http://localhost:5000/users/register',data)
-
-        console.log(result, 'that was the result');
+        // userdata 
+        if(password !== password2){
+            toast.error('passwords did not match !')
+        } else{
+            const userData = {name,email,password}
+            dispatch(register(userData))
+        }
     }
+    
+    if(isLoading) {
+        return <Spinner />
+    }
+
   return (
     <div className='register'>
         <h1>Register</h1>
@@ -30,7 +69,7 @@ const Register = () => {
                     name="name"
                     required
                     value={name}
-                    onChange={(e)=>setName(e.target.value)}
+                    onChange={onChange}
                     />
             </Form.Group>
             <Form.Group className="input-group">
@@ -40,7 +79,7 @@ const Register = () => {
                     name="email" 
                     required
                     value={email}
-                    onChange={(e)=>setEmail(e.target.value)}
+                    onChange={onChange}
                     />
             </Form.Group>
             <Form.Group className="input-group">
@@ -50,7 +89,7 @@ const Register = () => {
                     name="password"
                     required
                     value={password}
-                    onChange={(e)=> setPassword(e.target.value)}
+                    onChange={onChange}
                     />
             </Form.Group>
             <Form.Group className="input-group">
@@ -60,7 +99,7 @@ const Register = () => {
                     name="password2" 
                     required
                     value={password2}
-                    onChange={(e)=>setPassword2(e.target.value)}
+                    onChange={onChange}
                     />
             </Form.Group>
             <Button variant='primary' type='submit' className="my-3 mx-3">Submit</Button>

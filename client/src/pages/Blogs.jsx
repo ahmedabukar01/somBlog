@@ -8,16 +8,16 @@ import Posts from '../components/Posts';
 const Blogs = () => {
   const [blogs,setBlogs] = useState(null);
 
-  useEffect(()=>{
-    const fetchData = async () =>{
-     const res = await axios.get('http://localhost:5000/posts');
-     setBlogs(res.data.posts);
-    }
+  // useEffect(()=>{
+  //   const fetchData = async () =>{
+  //    const res = await axios.get('http://localhost:5000/posts');
+  //    setBlogs(res.data.posts);
+  //   }
 
-    fetchData();
-  },[])
+  //   fetchData();
+  // },[])
 
-  console.log(blogs)
+  // console.log(blogs)
 
   return (
     <div className='blogs'>
