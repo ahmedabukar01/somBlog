@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import authServices from './authServices';
+import blogService from './blogService';
 
 const blogs = localStorage.getItem('blogs');
 
@@ -11,10 +11,10 @@ const initialState = {
     message: ''
 }
 
-// register
-export const getBlogs = createAsyncThunk('auth/blogs', async (user, thunkApi)=>{
+// get blogs
+export const allBlogs = createAsyncThunk('auth/blogs', async (user, thunkApi)=>{
     try {
-        return authServices.register(user)
+        return blogService.getBlogs(user)
     } catch (error) {
         const message = (error.response && error.response.data && 
             error.response.data.message) || error.message || error.toString();
@@ -36,16 +36,16 @@ export const blogSlice = createSlice({
     },
     extraReducers: (builder) =>{
         builder
-        .addCase(register.pending, (state)=>{
+        .addCase(allBlogs.pending, (state)=>{
             state.isLoading = true
         })
-        .addCase(register.rejected, (state,actions)=>{
+        .addCase(allBlogs.rejected, (state,actions)=>{
             state.isLoading = false
             state.isError = true
             state.message = actions.payload
 
         })
-        .addCase(register.fulfilled, (state,actions)=>{
+        .addCase(allBlogs.fulfilled, (state,actions)=>{
             state.isLoading = false
             state.isSuccess = true
             state.user = actions.payload
