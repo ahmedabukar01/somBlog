@@ -25,7 +25,8 @@ const Login = () => {
 
    }
   return (
-    <Container md={4}>
+    <Container md={4} className='text-center'>
+      <h1 className='my-2'>Please Login</h1>
         <Form className='form py-3' onSubmit={submitForm}>
             <Form.Group className="input-group">
                 <Form.Control type="email" 
