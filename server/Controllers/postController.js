@@ -7,7 +7,7 @@ const { json } = require('express/lib/response');
 // @Path /posts
 const getPost = asyncHandler(async (req, res)=>{
     const posts = await Post.find();
-    res.json({posts})
+    res.json(posts)
 })
 
 // GEt Single Post

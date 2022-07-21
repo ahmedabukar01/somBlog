@@ -1,10 +1,8 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import blogService from './blogService';
 
-const blogs = localStorage.getItem('blogs');
-
 const initialState = {
-    blogs: blogs ? blogs : null,
+    blogs: [],
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -12,9 +10,10 @@ const initialState = {
 }
 
 // get blogs
-export const allBlogs = createAsyncThunk('auth/blogs', async (user, thunkApi)=>{
+export const allBlogs = createAsyncThunk('auth/blogs', async (_, thunkApi)=>{
     try {
-        return blogService.getBlogs(user)
+        const token = thunkApi.getState().auth.user.token;
+        return blogService.getBlogs(token)
     } catch (error) {
         const message = (error.response && error.response.data && 
             error.response.data.message) || error.message || error.toString();
@@ -48,7 +47,7 @@ export const blogSlice = createSlice({
         .addCase(allBlogs.fulfilled, (state,actions)=>{
             state.isLoading = false
             state.isSuccess = true
-            state.user = actions.payload
+            state.blogs = actions.payload
         })
     }
 })

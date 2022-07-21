@@ -1,32 +1,51 @@
-import axios from 'axios';
+import { allBlogs, reset } from '../features/blogs/blogSlice';
+import {useNavigate} from 'react-router-dom'
+import {useDispatch, useSelector} from 'react-redux'
 import {useState, useEffect} from 'react'
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import Posts from '../components/Posts';
 
 
 
 const Blogs = () => {
-  const [blogs,setBlogs] = useState(null);
 
-  // useEffect(()=>{
-  //   const fetchData = async () =>{
-  //    const res = await axios.get('http://localhost:5000/posts');
-  //    setBlogs(res.data.posts);
-  //   }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  //   fetchData();
-  // },[])
+  const user = useSelector((state)=> state.auth.user)
+  const {blogs,isError, isLoading, message} = useSelector((state)=> state.blogs)
 
-  // console.log(blogs)
+  useEffect(()=>{
 
+    if(!user){
+      navigate('/login')
+    }
+    if(isError){
+      console.log(message)
+    }
+
+    dispatch(allBlogs());
+
+    return ()=>{
+      dispatch(reset())
+    }
+
+  },[user, isError, message, navigate, dispatch])
+
+  if(isLoading){
+    return <Spinner />
+  }
+  console.log(typeof blogs, blogs)
   return (
     <div className='blogs'>
        <h1 className='text-center my-3'>All Blogs...</h1>
 
     <Container>
-      {blogs && blogs.map(blog=>(
+      {
+      blogs.length > 0 ? ( blogs.map(blog=>(
         <Posts key={blog._id} post={blog}/>
-       ))}
+       ))) : (<h3>you dont have any posts</h3>)
+       }
     </Container>
 
     </div>
