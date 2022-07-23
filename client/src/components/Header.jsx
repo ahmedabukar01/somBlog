@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import {Link} from 'react-router-dom';
+import {Button} from 'react-bootstrap'
 
 const Header = () => {
 
@@ -17,7 +18,7 @@ const Header = () => {
             <Link to={'/register'} >Register</Link>
             <Link to={'/login'}>Sig in</Link>
             </>: (
-            <Link to={'/sign'}>Logout</Link>
+            <Button variant='secondary'>Logout</Button>
           )}
         </div>
     </div>

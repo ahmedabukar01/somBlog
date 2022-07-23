@@ -2,8 +2,9 @@ import { allBlogs, reset } from '../features/blogs/blogSlice';
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {useState, useEffect} from 'react'
-import { Container, Spinner } from 'react-bootstrap';
+import { Button, Container } from 'react-bootstrap';
 import Posts from '../components/Posts';
+import Spinner from '../components/Spinner';
 
 
 
@@ -38,7 +39,11 @@ const Blogs = () => {
   console.log(typeof blogs, blogs)
   return (
     <div className='blogs'>
-       <h1 className='text-center my-3'>All Blogs...</h1>
+       <div className="d-flex align-items-center justify-content-around">
+        <h1 className='text-center my-3'>All Blogs...</h1>
+        <Button>Add new Post</Button>
+       </div>
+       
 
     <Container>
       {
