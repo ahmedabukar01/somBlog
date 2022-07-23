@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import {Form, Button, Container} from 'react-bootstrap'
+import { useState, useEffect } from 'react';
+import {Form, Button, Container, Spinner} from 'react-bootstrap'
 import {login, reset} from '../features/auth/authSlice';
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
+import { toast } from 'react-toastify';
 
 const Login = () => {
 
@@ -19,13 +20,36 @@ const Login = () => {
       }
     ));
 
-    console.log(credentials);
   }
+
+  const {email, password} = credentials;
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const {user,isError, isLoading, isSuccess, message} = useSelector(state=> state.auth);
+
+  useEffect(()=>{
+    if(isError){
+      console.log(message)
+    }
+    if(isSuccess){
+      navigate('/')
+    }
+
+    dispatch(reset())
+  },[user, isError, message, dispatch])
 
   // submit email and password
    const submitForm = async (e) =>{
     e.preventDefault();
 
+    const userData = {email, password};
+    dispatch(login(userData));
+   }
+
+   if(isLoading){
+    return <Spinner />
    }
   return (
     <Container md={4} className='text-center'>

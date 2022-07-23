@@ -1,7 +1,13 @@
+import { useEffect } from 'react';
 import {Link} from 'react-router-dom';
 
 const Header = () => {
-  const user = JSON.parse(localStorage.getItem('user'));
+
+  let user = JSON.parse(localStorage.getItem('user'));
+
+  useEffect(()=>{
+    user = JSON.parse(localStorage.getItem('user'))
+  },[user])
 
   return (
     <div className='header'>
@@ -11,7 +17,7 @@ const Header = () => {
             <Link to={'/register'} >Register</Link>
             <Link to={'/login'}>Sig in</Link>
             </>: (
-            <Link to={'/logout'}>Logout</Link>
+            <Link to={'/sign'}>Logout</Link>
           )}
         </div>
     </div>
