@@ -1,7 +1,7 @@
 import { allBlogs, reset } from '../features/blogs/blogSlice';
 import {useNavigate} from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
-import {useState, useEffect} from 'react'
+import {useEffect} from 'react'
 import { Button, Container } from 'react-bootstrap';
 import Posts from '../components/Posts';
 import Spinner from '../components/Spinner';
