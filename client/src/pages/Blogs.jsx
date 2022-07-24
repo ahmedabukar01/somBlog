@@ -5,6 +5,7 @@ import {useEffect} from 'react'
 import { Button, Container } from 'react-bootstrap';
 import Posts from '../components/Posts';
 import Spinner from '../components/Spinner';
+import AddPost from '../components/AddPost';
 
 
 
@@ -44,6 +45,7 @@ const Blogs = () => {
         <Button>Add new Post</Button>
        </div>
        
+       <AddPost />
 
     <Container>
       {

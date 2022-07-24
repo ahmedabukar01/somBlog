@@ -2,8 +2,7 @@ import {Button, Form, Container} from 'react-bootstrap'
 
 const AddPost = () => {
   return (
-    <div>
-        <h2>Add New Post</h2>
+    <Container className="my-4">
         <Form>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
@@ -13,11 +12,11 @@ const AddPost = () => {
                 <Form.Label>Body</Form.Label>
                 <Form.Control type='text' placeholder='Body'/>
             </Form.Group>
-            <Form.Group>
-                <Button variant="primary" type="submit">Post</Button>
+            <Form.Group className="my-3 ">
+                <Button variant="success" type="submit">Post</Button>
             </Form.Group>
         </Form>
-    </div>
+    </Container>
   )
 }
 
