@@ -37,7 +37,7 @@ const Blogs = () => {
   if(isLoading){
     return <Spinner />
   }
-  console.log(typeof blogs, blogs)
+  
   return (
     <div className='blogs'>
        <div className="d-flex align-items-center justify-content-around">

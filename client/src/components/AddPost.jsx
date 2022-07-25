@@ -1,8 +1,10 @@
 import {Button, Form, Container} from 'react-bootstrap'
 import {useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
 import {addPost, reset} from '../features/blogs/blogSlice'
 import {toast} from 'react-toastify'
+import { allBlogs } from '../features/blogs/blogSlice'
 import Spinner from '../components/Spinner'
 
 const AddPost = () => {
@@ -19,26 +21,36 @@ const AddPost = () => {
     const { title, body} = postData;
 
     const dispatch = useDispatch();
+    const navigate = useNavigate();
                                                  
-    const {blogs,isError, isSuccess, isLoading, message} = useSelector(state => state.blogs)
+    const {isError, isSuccess, isLoading, message} = useSelector(state => state.blogs)
 
-    useEffect(()=>{
-        if(isError){
-            toast.error(message)
-        }
+    // useEffect(()=>{
+    //     if(isError){
+    //         toast.error(message)
+    //     }
 
-   
+    //     if(isSuccess){
+            
+    //     }
 
-        return ()=>{
-            dispatch(reset())
-        }
-    },[isError, message, dispatch])
+    //     return ()=>{
+    //         dispatch(reset())
+    //     }
+    // },[isError, message, dispatch])
 
     const onSubmit = (e)=>{
         e.preventDefault();
+    
+        if(isError){
+            toast.error(message);
+        }
+        if(isSuccess){
+            const userData = {title,body}
+            dispatch(addPost(userData));
+            dispatch(allBlogs())
 
-        const userData = {title,body}
-        dispatch(addPost(userData))
+        }
 
     }
 

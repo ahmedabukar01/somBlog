@@ -20,7 +20,7 @@ const singlePost = asyncHandler(async (req,res)=>{
         throw new Error('post not found');
     }
 
-    res.json({post});
+    res.json(post);
 })
 
 // @method POST
@@ -32,13 +32,13 @@ const createPost = asyncHandler(async (req, res)=>{
         throw new Error('fill the blank man!')
     }
 
-    const post = await Post.create({
+    const blogs = await Post.create({
         title: req.body.title,
         body: req.body.body,
         user: req.user.id
     });
 
-    res.status(200).json({post})
+    res.status(200).json(blogs)
 })
 //
 const updatePost = asyncHandler(async (req, res)=>{
