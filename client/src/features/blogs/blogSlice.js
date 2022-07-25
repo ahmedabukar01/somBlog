@@ -52,30 +52,30 @@ export const blogSlice = createSlice({
         .addCase(allBlogs.pending, (state)=>{
             state.isLoading = true
         })
-        .addCase(allBlogs.rejected, (state,actions)=>{
+        .addCase(allBlogs.rejected, (state,action)=>{
             state.isLoading = false
             state.isError = true
-            state.message = actions.payload
+            state.message = action.payload
 
         })
-        .addCase(allBlogs.fulfilled, (state,actions)=>{
+        .addCase(allBlogs.fulfilled, (state,action)=>{
             state.isLoading = false
             state.isSuccess = true
-            state.blogs = actions.payload
+            state.blogs = action.payload
         })
         .addCase(addPost.pending, (state)=>{
             state.isLoading = true
         })
-        .addCase(addPost.rejected, (state,actions)=>{
+        .addCase(addPost.rejected, (state,action)=>{
             state.isLoading = false
             state.isError = true
-            state.message = actions.payload
+            state.message = action.payload
 
         })
-        .addCase(addPost.fulfilled, (state,actions)=>{
+        .addCase(addPost.fulfilled, (state,action)=>{
             state.isLoading = false
             state.isSuccess = true
-            state.blogs = actions.payload
+            state.blogs.push(action.payload)
         })
     }
 })
