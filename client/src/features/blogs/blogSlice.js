@@ -26,8 +26,6 @@ export const allBlogs = createAsyncThunk('blogs/blogs', async (_, thunkApi)=>{
 export const addPost = createAsyncThunk('blogs/add', async (userData, thunkApi)=>{
     try {
         const token = thunkApi.getState().auth.user.token;
-        const what = thunkApi.getState().auth.user.id;
-        console.log(what)
         console.log(token, 'there was token')
         return blogService.addPost(userData,token);
     } catch (error) {

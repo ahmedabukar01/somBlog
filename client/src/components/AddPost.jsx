@@ -32,7 +32,7 @@ const AddPost = () => {
         return ()=>{
             dispatch(reset())
         }
-    },[])
+    },[isError, message, dispatch])
 
     const onSubmit = (e)=>{
         e.preventDefault();
