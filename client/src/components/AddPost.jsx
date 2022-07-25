@@ -1,5 +1,9 @@
 import {Button, Form, Container} from 'react-bootstrap'
-import {useState } from 'react'
+import {useState, useEffect } from 'react'
+import {useDispatch, useSelector} from 'react-redux'
+import {addPost, reset} from '../features/blogs/blogSlice'
+import {toast} from 'react-toastify'
+import Spinner from '../components/Spinner'
 
 const AddPost = () => {
     const [postData, setPostData] = useState({
@@ -13,10 +17,38 @@ const AddPost = () => {
     }
     
     const { title, body} = postData;
-    console.log(title,body)
+
+    const dispatch = useDispatch();
+                                                 
+    const {blogs,isError, isSuccess, isLoading, message} = useSelector(state => state.blogs)
+
+    useEffect(()=>{
+        if(isError){
+            toast.error(message)
+        }
+
+   
+
+        return ()=>{
+            dispatch(reset())
+        }
+    },[])
+
+    const onSubmit = (e)=>{
+        e.preventDefault();
+
+        const userData = {title,body}
+        dispatch(addPost(userData))
+
+    }
+
+    if(isLoading){
+        return <Spinner />
+    }
+
   return (
     <Container className="my-4">
-        <Form>
+        <Form onSubmit={onSubmit}>
             <Form.Group>
                 <Form.Label>Title</Form.Label>
                 <Form.Control type='text' placeholder='Title' name="title" onChange={dataHandler}/>

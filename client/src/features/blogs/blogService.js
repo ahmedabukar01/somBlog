@@ -2,6 +2,7 @@ import axios from 'axios'
 
 const API_URL = 'http://localhost:5000/posts'
 
+// get all post
 const getBlogs = async (token) => {
     // const config = {
     //     headers: {
@@ -18,8 +19,23 @@ const getBlogs = async (token) => {
     return response.data
 }
 
+// add new post
+const addPost = async (userData, token) =>{
+
+    const config = {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    }
+
+    const response = await axios.post(API_URL,userData, config);
+
+    return response.data
+
+}
 const blogService = {
-    getBlogs
+    getBlogs,
+    addPost
 }
 
 export default blogService

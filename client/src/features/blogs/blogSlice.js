@@ -10,7 +10,7 @@ const initialState = {
 }
 
 // get blogs
-export const allBlogs = createAsyncThunk('auth/blogs', async (_, thunkApi)=>{
+export const allBlogs = createAsyncThunk('blogs/blogs', async (_, thunkApi)=>{
     try {
         const token = thunkApi.getState().auth.user.token;
         return blogService.getBlogs(token)
@@ -19,6 +19,22 @@ export const allBlogs = createAsyncThunk('auth/blogs', async (_, thunkApi)=>{
             error.response.data.message) || error.message || error.toString();
             return thunkApi.rejectWithValue(message);
 
+    }
+})
+
+// add Blog
+export const addPost = createAsyncThunk('blogs/add', async (userData, thunkApi)=>{
+    try {
+        const token = thunkApi.getState().auth.user.token;
+        const what = thunkApi.getState().auth.user.id;
+        console.log(what)
+        console.log(token, 'there was token')
+        return blogService.addPost(userData,token);
+    } catch (error) {
+        const message = (error.response && error.response.data && 
+            error.response.data.message) || error.message || error.toString();
+            return thunkApi.rejectWithValue(message);
+        
     }
 })
 
@@ -45,6 +61,20 @@ export const blogSlice = createSlice({
 
         })
         .addCase(allBlogs.fulfilled, (state,actions)=>{
+            state.isLoading = false
+            state.isSuccess = true
+            state.blogs = actions.payload
+        })
+        .addCase(addPost.pending, (state)=>{
+            state.isLoading = true
+        })
+        .addCase(addPost.rejected, (state,actions)=>{
+            state.isLoading = false
+            state.isError = true
+            state.message = actions.payload
+
+        })
+        .addCase(addPost.fulfilled, (state,actions)=>{
             state.isLoading = false
             state.isSuccess = true
             state.blogs = actions.payload
