@@ -32,7 +32,7 @@ const Blogs = () => {
       dispatch(reset())
     }
 
-  },[user, isError, message, navigate, dispatch])
+  },[user, dispatch, navigate])
 
   if(isLoading){
     return <Spinner />
